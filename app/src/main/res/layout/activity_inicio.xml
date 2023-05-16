@@ -79,7 +79,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- CardView 2 - Ver Pedidos -->
+    <!-- CardView - Ver Pedidos -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_ver_pedidos"
         android:layout_width="match_parent"
@@ -116,7 +116,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- CardView 2 - Ver Stock -->
+    <!-- CardView - Ver Stock -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_ver_stock"
         android:layout_width="match_parent"
@@ -150,7 +150,42 @@
                 android:textColor="@color/silver"/>
 
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
+    <!-- CardView - Ver Stock -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_cocina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_ver_stock"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="13dp"
+        app:cardBackgroundColor="@color/night">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cocina"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Aqui podras acceder a la interfaz de cocina."
+                android:textColor="@color/silver"/>
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

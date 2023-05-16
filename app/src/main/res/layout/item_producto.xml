@@ -81,7 +81,6 @@
                         android:padding="0dp"
                         android:text="+"
                         android:layout_marginStart="60dp"/>
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

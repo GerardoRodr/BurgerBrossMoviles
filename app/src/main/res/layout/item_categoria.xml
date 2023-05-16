@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="210dp"
+    android:layout_width="190dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/night"
@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/iconoCategoria"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/hamburguesa"
             android:scaleType="fitCenter"
             android:layout_marginTop="15dp"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Hamburguesas"
-            android:textSize="25dp"
+            android:textSize="23dp"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginBottom="15dp"

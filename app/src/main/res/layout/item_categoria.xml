@@ -17,7 +17,7 @@
             android:id="@+id/iconoCategoria"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/hamburguesa"
+            android:src="@drawable/hamburguesas_icon"
             android:scaleType="fitCenter"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"/>

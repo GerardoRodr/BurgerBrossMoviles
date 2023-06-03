@@ -37,7 +37,7 @@
             android:src="@drawable/check"
             android:scaleType="centerCrop"
             android:layout_gravity="center_vertical"
-            android:background=""
+            android:background="@color/night"
             android:layout_marginStart="120dp"
             />
     </LinearLayout>

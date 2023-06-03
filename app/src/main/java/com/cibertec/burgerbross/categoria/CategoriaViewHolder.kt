@@ -1,4 +1,4 @@
-package com.cibertec.burguerbross.categorias
+package com.cibertec.burgerbross.categoria
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +10,8 @@ import com.cibertec.burgerbross.R
 class CategoriaViewHolder(inflater: LayoutInflater, parent : ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_categoria,parent,false)) {
 
-    private var imgIcono : ImageView?  =    null
-    private var txtTitulo : TextView?   =    null
-
+    private var imgIcono : ImageView? = null
+    private var txtTitulo : TextView? = null
 
     init {
         imgIcono = itemView.findViewById(R.id.iconoCategoria)
@@ -20,8 +19,7 @@ class CategoriaViewHolder(inflater: LayoutInflater, parent : ViewGroup) :
     }
 
     fun bind(categoria: Categoria) {
-        txtTitulo?.text         = categoria.titulo
+        txtTitulo?.text = categoria.titulo
         imgIcono?.setImageResource(categoria.icono)
     }
-
 }

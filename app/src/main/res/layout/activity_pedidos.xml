@@ -8,43 +8,26 @@
     <!-- Barra de navegacion -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:backgroundTint="@color/black">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:gravity="center">
-
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:text="l"
-                android:textSize="20dp"
-                android:layout_marginEnd="90dp"
-                />
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Pedidos"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
-
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:text="r"
-                android:textSize="20dp"
-                android:layout_marginStart="90dp"
-                >
-            </Button>
-        </LinearLayout>
+                android:textSize="22sp"/>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCategorias"

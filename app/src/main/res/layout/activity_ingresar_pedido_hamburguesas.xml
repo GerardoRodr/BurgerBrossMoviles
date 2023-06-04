@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Ingresar pedido"
+                android:text="Hamburguesas"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -42,19 +42,14 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Categorias:"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginStart="16dp"/>
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerCategoriasIngresarPedido"
+        android:id="@+id/recycler_IngresarPedido_Hamburguesas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:itemCount="4"
-        tools:listitem="@layout/item_categoria" />
+        tools:listitem="@layout/item_producto"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        />
+
 </LinearLayout>

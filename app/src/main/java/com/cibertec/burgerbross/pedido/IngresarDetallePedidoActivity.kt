@@ -19,7 +19,6 @@ import com.cibertec.burgerbross.producto.ProductosPredefinidos
 
 class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemClickListener {
 
-    private var lastSelectedItem: Producto? = null
     private lateinit var prodViewModel: ProductoViewModel
     lateinit var listaProductos: List<Producto>
     private lateinit var productoAdapter: ProductoAdapter
@@ -92,8 +91,6 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
     }
 
     override fun onBtnIncreaseClick(prodItem: Producto) {
-        //REDISEÑO TOTAL DEL SISTEMA DE CONTEO
-
         if (prodItem.cantProd == 0) {
             //Añade +1 a la cantidad del producto ("De base tiene 0")
             prodItem.cantProd += 1
@@ -112,8 +109,6 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
     }
 
     override fun onBtnDecreaseClick(prodItem: Producto) {
-        //REDISEÑO TOTAL DEL SISTEMA DE CONTEO
-
         if (prodItem.cantProd != 0) {
             //Resta -1 a la cantidad del producto ("De base tiene más de 0")
             prodItem.cantProd -= 1

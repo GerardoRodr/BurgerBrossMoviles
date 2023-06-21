@@ -1,0 +1,28 @@
+package com.cibertec.burgerbross.producto
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.cibertec.burgerbross.R
+
+class ProductoViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+    RecyclerView.ViewHolder(inflater.inflate(R.layout.item_producto, parent, false)){
+
+    private var imgProducto : ImageView? = null
+    private var nombreProducto : TextView? = null
+    private var descProducto : TextView? = null
+
+    init {
+        imgProducto = itemView.findViewById(R.id.imgProducto)
+        nombreProducto = itemView.findViewById(R.id.nombreProducto)
+        descProducto = itemView.findViewById(R.id.descProducto)
+    }
+
+    fun bind(producto: ProductoFirestore) {
+        nombreProducto?.text = producto.nombre_producto
+        descProducto?.text = producto.desc_producto
+        imgProducto?.setImageResource(producto.img)
+    }
+}

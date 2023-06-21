@@ -23,7 +23,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".InicioActivity"/>
         <activity android:name=".PerfilActivity"/>
-        <activity android:name=".IngresarPedidoActivity"/>}
+        <activity android:name=".IngresarPedidoActivity"/>
         <activity android:name=".PedidosActivity"/>
     </application>
 

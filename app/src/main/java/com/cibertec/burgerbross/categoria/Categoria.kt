@@ -4,7 +4,3 @@ data class Categoria(
     val titulo:String,
     val icono :Int
     )
-{
-
-
-}

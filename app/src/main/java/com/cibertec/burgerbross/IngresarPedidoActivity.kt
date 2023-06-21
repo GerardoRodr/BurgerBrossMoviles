@@ -8,6 +8,8 @@ import com.cibertec.burgerbross.categoria.Categoria
 import com.cibertec.burgerbross.categoria.CategoriaAdapter
 
 class IngresarPedidoActivity : AppCompatActivity() {
+
+
     val listaCategoria = listOf(
         Categoria("Hamburguesas", R.drawable.hamburguesas_icon),
         Categoria("Bebidas", R.drawable.bebidas_icon),

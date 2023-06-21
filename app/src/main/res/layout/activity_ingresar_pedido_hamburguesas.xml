@@ -46,10 +46,9 @@
         android:id="@+id/recycler_IngresarPedido_Hamburguesas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_producto"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        />
+        tools:itemCount="4"
+        tools:listitem="@layout/item_producto" />
 
 </LinearLayout>

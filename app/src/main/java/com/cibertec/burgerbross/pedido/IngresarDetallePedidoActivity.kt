@@ -45,6 +45,15 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
         //CARGA DE DATOS DE PRODUCTOS("HAMBURGUESAS")
         ProductosPredefinidos.initializeHamburguesas(this)
 
+        //CARGA DE DATOS DE PRODUCTOS("BEBIDAS")
+        ProductosPredefinidos.initializeBebidas(this)
+
+        //CARGA DE DATOS DE PRODUCTOS("COMPLEMENTOS")
+        ProductosPredefinidos.initializeComplementos(this)
+
+        //CARGA DE DATOS DE PRODUCTOS("ADICIONALES")
+        ProductosPredefinidos.initializeAdicionales(this)
+
         val recyclerProds = findViewById<RecyclerView>(R.id.recycler_IngresarPedido_Producto)
 
         val adapter = ProductoAdapter(this)
@@ -59,6 +68,17 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
                 if (prods.isNotEmpty()) {
                     recyclerProds.visibility = View.VISIBLE
 
+                    // Recorre la lista de productos de la base de datos
+                    for (p in prods) {
+                        // Busca el producto en la lista de ProductosManager por su id
+                        val productoEnManager = ProductosManager.getProductosList().find { it.idProducto == p.idProducto }
+
+                        //SOLO SE MODIFICA SI EL productoEnManager no es nulo (Es decir si encuentra un producto en la lista con esa id)
+                        if(productoEnManager != null) {
+                            p.cantProd = productoEnManager.cantProd
+                        }
+                    }
+
                     listaProductos = prods
 
                     prods?.let {
@@ -69,45 +89,40 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
                 }
             }
         }
-
     }
 
     override fun onBtnIncreaseClick(prodItem: Producto) {
-        if (lastSelectedItem != null && lastSelectedItem == prodItem) {
-            //Le añade +1 a la cantidad del ultimo item seleccionado
-            lastSelectedItem!!.cantProd += 1
-            //Lo actualiza en la lista de Productos que persiste en varios activity's
-            ProductosManager.updateProducto(lastSelectedItem!!)
-            //Actualiza el RecyclerView
-            productoAdapter.updateCantidad(lastSelectedItem!!, lastSelectedItem!!.cantProd)
-            //TEST
-            println(prodItem.nombreProducto + " CANTIDAD: " + prodItem.cantProd)
-        } else {
+        //REDISEÑO TOTAL DEL SISTEMA DE CONTEO
+
+        if (prodItem.cantProd == 0) {
             //Añade +1 a la cantidad del producto ("De base tiene 0")
             prodItem.cantProd += 1
             //Se agrega el producto a la lista de Producto
             ProductosManager.addProducto(prodItem)
-            //Se le da el valor de ese producto a la variable lastSelectedItem ("Ultimo producto seleccionado")
-            lastSelectedItem = prodItem
             //Se actualiza la cantidad en el RecyclerView
             productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
-            //TEST TODO:ELIMINAR EL PRINTLN
-            println(prodItem.nombreProducto + " CANTIDAD: " + prodItem.cantProd)
+        } else {
+            //Añade +1 a la cantidad del producto ("De base tiene más de 0")
+            prodItem.cantProd += 1
+            //Se ACTUALIZA el producto en la lista de Producto
+            ProductosManager.updateProducto(prodItem)
+            //Se actualiza la cantidad en el RecyclerView
+            productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
         }
     }
 
     override fun onBtnDecreaseClick(prodItem: Producto) {
-        if (lastSelectedItem != null && lastSelectedItem == prodItem) {
-            //Le añade +1 a la cantidad del ultimo item seleccionado
-            lastSelectedItem!!.cantProd -= 1
-            //Lo actualiza en la lista de Productos que persiste en varios activity's
-            ProductosManager.updateProducto(lastSelectedItem!!)
-            //Actualiza el RecyclerView
-            productoAdapter.updateCantidad(lastSelectedItem!!, lastSelectedItem!!.cantProd)
-            //TEST
-            println(prodItem.nombreProducto + " CANTIDAD: " + prodItem.cantProd)
+        //REDISEÑO TOTAL DEL SISTEMA DE CONTEO
+
+        if (prodItem.cantProd != 0) {
+            //Resta -1 a la cantidad del producto ("De base tiene más de 0")
+            prodItem.cantProd -= 1
+            //Se agrega el producto a la lista de Producto
+            ProductosManager.updateProducto(prodItem)
+            //Se actualiza la cantidad en el RecyclerView
+            productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
         } else {
-            Toast.makeText(this, "No existe ningun producto para eliminar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Este producto ya tiene de cantidad '0' ", Toast.LENGTH_SHORT).show()
         }
     }
 }

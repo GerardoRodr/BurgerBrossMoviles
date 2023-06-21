@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,13 +14,15 @@ import com.cibertec.burgerbross.producto.Producto
 import com.cibertec.burgerbross.producto.ProductoAdapter
 import com.cibertec.burgerbross.producto.ProductoViewHolder
 import com.cibertec.burgerbross.producto.ProductoViewModel
+import com.cibertec.burgerbross.producto.ProductosManager
 import com.cibertec.burgerbross.producto.ProductosPredefinidos
 
 class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemClickListener {
 
+    private var lastSelectedItem: Producto? = null
     private lateinit var prodViewModel: ProductoViewModel
     lateinit var listaProductos: List<Producto>
-    private lateinit var prodVH: ProductoViewHolder
+    private lateinit var productoAdapter: ProductoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,7 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
             ViewModelProvider(this)[ProductoViewModel::class.java]
         }
 
-        //CARGA DE DATOS DE PRODUCTOS
+        //CARGA DE DATOS DE PRODUCTOS("HAMBURGUESAS")
         ProductosPredefinidos.initializeHamburguesas(this)
 
         val recyclerProds = findViewById<RecyclerView>(R.id.recycler_IngresarPedido_Producto)
@@ -48,6 +51,8 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
 
         recyclerProds.adapter = adapter
         recyclerProds.layoutManager = LinearLayoutManager(applicationContext)
+
+        productoAdapter = adapter
 
         if (receivedCategoryId != null) {
             prodViewModel.prodByIdCat(receivedCategoryId)?.observe(this) {prods ->
@@ -68,14 +73,41 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
     }
 
     override fun onBtnIncreaseClick(prodItem: Producto) {
-        println("INCREMENTADO")
+        if (lastSelectedItem != null && lastSelectedItem == prodItem) {
+            //Le añade +1 a la cantidad del ultimo item seleccionado
+            lastSelectedItem!!.cantProd += 1
+            //Lo actualiza en la lista de Productos que persiste en varios activity's
+            ProductosManager.updateProducto(lastSelectedItem!!)
+            //Actualiza el RecyclerView
+            productoAdapter.updateCantidad(lastSelectedItem!!, lastSelectedItem!!.cantProd)
+            //TEST
+            println(prodItem.nombreProducto + " CANTIDAD: " + prodItem.cantProd)
+        } else {
+            //Añade +1 a la cantidad del producto ("De base tiene 0")
+            prodItem.cantProd += 1
+            //Se agrega el producto a la lista de Producto
+            ProductosManager.addProducto(prodItem)
+            //Se le da el valor de ese producto a la variable lastSelectedItem ("Ultimo producto seleccionado")
+            lastSelectedItem = prodItem
+            //Se actualiza la cantidad en el RecyclerView
+            productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
+            //TEST TODO:ELIMINAR EL PRINTLN
+            println(prodItem.nombreProducto + " CANTIDAD: " + prodItem.cantProd)
+        }
     }
 
     override fun onBtnDecreaseClick(prodItem: Producto) {
-        println("DECREMENTADO")
-    }
-
-    override fun onItemClick(prodItem: Producto) {
-        TODO("Posible Funcion para mostrar detalle del producto")
+        if (lastSelectedItem != null && lastSelectedItem == prodItem) {
+            //Le añade +1 a la cantidad del ultimo item seleccionado
+            lastSelectedItem!!.cantProd -= 1
+            //Lo actualiza en la lista de Productos que persiste en varios activity's
+            ProductosManager.updateProducto(lastSelectedItem!!)
+            //Actualiza el RecyclerView
+            productoAdapter.updateCantidad(lastSelectedItem!!, lastSelectedItem!!.cantProd)
+            //TEST
+            println(prodItem.nombreProducto + " CANTIDAD: " + prodItem.cantProd)
+        } else {
+            Toast.makeText(this, "No existe ningun producto para eliminar", Toast.LENGTH_SHORT).show()
+        }
     }
 }

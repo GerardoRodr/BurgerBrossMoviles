@@ -33,6 +33,8 @@ data class Producto(
         const val TABLE_NAME = "tb_productos"
     }
 
+    var cantProd: Int = 0
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_producto")
     var idProducto: Int = 0

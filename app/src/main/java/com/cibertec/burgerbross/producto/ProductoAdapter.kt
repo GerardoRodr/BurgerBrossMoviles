@@ -7,11 +7,25 @@ import androidx.recyclerview.widget.RecyclerView
 class ProductoAdapter(val mItemClickListener: ItemClickListener) :
     RecyclerView.Adapter<ProductoViewHolder>(){
 
-    private var productoList = emptyList<Producto>()
+    //Cambiado de emptyList<Producto>() a mutableListOf<Producto>()
+    private var productoList = mutableListOf<Producto>()
 
     fun setProductos(producto: List<Producto>) {
-        this.productoList = producto
-        this.notifyDataSetChanged()
+        productoList.clear()
+        productoList.addAll(producto)
+        notifyDataSetChanged()
+        /*this.productoList = producto
+        this.notifyDataSetChanged()*/
+    }
+
+    fun updateCantidad(producto: Producto, nuevaCantidad: Int) {
+        val index = productoList.indexOf(producto)
+        if (index != -1) {
+            val productoActualizado = productoList[index]
+            productoActualizado.cantProd = nuevaCantidad
+            productoList[index] = productoActualizado
+            notifyItemChanged(index)
+        }
     }
 
     override fun getItemCount(): Int = productoList.size
@@ -25,19 +39,8 @@ class ProductoAdapter(val mItemClickListener: ItemClickListener) :
         val producto: Producto = productoList[position]
         holder.bind(producto)
 
-        var cantProd: Int = 0
-
-        holder.itemView.setOnClickListener {
-            mItemClickListener.onItemClick(producto)
-            cantProd += 1
-            holder.cantProd.text = cantProd.toString()
-        }
-
         holder.btnDecrease.setOnClickListener {
             mItemClickListener.onBtnDecreaseClick(producto)
-
-            cantProd -= 1
-            holder.cantProd.text = cantProd.toString()
         }
 
         holder.btnIncrease.setOnClickListener {
@@ -46,7 +49,6 @@ class ProductoAdapter(val mItemClickListener: ItemClickListener) :
     }
 
     interface ItemClickListener{
-        fun onItemClick(prodItem: Producto)
         fun onBtnIncreaseClick(prodItem: Producto)
         fun onBtnDecreaseClick(prodItem: Producto)
     }

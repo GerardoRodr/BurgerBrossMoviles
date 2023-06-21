@@ -16,17 +16,19 @@ class ProductoViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var descProducto : TextView? = null
     var btnDecrease : Button = itemView.findViewById(R.id.btnDecrease)
     var btnIncrease : Button = itemView.findViewById(R.id.btnIncrease)
-    var cantProd : TextView = itemView.findViewById(R.id.cantidadProd)
+    private var cantProd : TextView? = null
 
     init {
         imgProducto = itemView.findViewById(R.id.imgProducto)
         nombreProducto = itemView.findViewById(R.id.nombreProducto)
         descProducto = itemView.findViewById(R.id.descProducto)
+        cantProd = itemView.findViewById(R.id.cantidadProd)
     }
 
     fun bind(producto: Producto) {
         nombreProducto?.text = producto.nombreProducto
         descProducto?.text = producto.descripcion
         imgProducto?.setImageResource(producto.img)
+        cantProd?.text = producto.cantProd.toString()
     }
 }

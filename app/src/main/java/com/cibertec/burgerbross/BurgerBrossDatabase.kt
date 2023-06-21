@@ -29,7 +29,7 @@ abstract class BurgerBrossDatabase: RoomDatabase() {
                         context.applicationContext,
                         BurgerBrossDatabase::class.java,
                         DATABASE_NAME
-                    ).build()
+                    ).fallbackToDestructiveMigration().build()
                 }
             return INSTANCE
         }

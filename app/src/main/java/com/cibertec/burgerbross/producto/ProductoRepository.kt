@@ -23,4 +23,8 @@ class ProductoRepository (application: Application) {
     fun getProductos(): LiveData<List<Producto>>? {
         return productoDao?.list()
     }
+
+    fun getProductosByCategoria(idCat: Int): LiveData<List<Producto>>? {
+        return productoDao?.listByIdCategoria(idCat)
+    }
 }

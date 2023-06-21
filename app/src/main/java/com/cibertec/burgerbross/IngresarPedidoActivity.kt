@@ -1,5 +1,6 @@
 package com.cibertec.burgerbross
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cibertec.burgerbross.categoria.CategoriaProducto
 import com.cibertec.burgerbross.categoria.CategoriaProductoAdapter
 import com.cibertec.burgerbross.categoria.CategoriaProductoViewModel
+import com.cibertec.burgerbross.pedido.IngresarDetallePedidoActivity
 
 class IngresarPedidoActivity: AppCompatActivity(), CategoriaProductoAdapter.ItemClickListener {
 
@@ -73,6 +75,12 @@ class IngresarPedidoActivity: AppCompatActivity(), CategoriaProductoAdapter.Item
     }
 
     override fun onItemClick(categItem: CategoriaProducto) {
-        println(categItem.nombreCategoria)
+        println(categItem.idCategoriaProducto)
+        val intent = Intent(this, IngresarDetallePedidoActivity::class.java)
+        val bundle = Bundle()
+        bundle.putInt("categoryId", categItem.idCategoriaProducto)
+        bundle.putString("titulo", categItem.nombreCategoria)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 }

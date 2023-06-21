@@ -25,12 +25,29 @@ class ProductoAdapter(val mItemClickListener: ItemClickListener) :
         val producto: Producto = productoList[position]
         holder.bind(producto)
 
+        var cantProd: Int = 0
+
         holder.itemView.setOnClickListener {
             mItemClickListener.onItemClick(producto)
+            cantProd += 1
+            holder.cantProd.text = cantProd.toString()
+        }
+
+        holder.btnDecrease.setOnClickListener {
+            mItemClickListener.onBtnDecreaseClick(producto)
+
+            cantProd -= 1
+            holder.cantProd.text = cantProd.toString()
+        }
+
+        holder.btnIncrease.setOnClickListener {
+            mItemClickListener.onBtnIncreaseClick(producto)
         }
     }
 
     interface ItemClickListener{
         fun onItemClick(prodItem: Producto)
+        fun onBtnIncreaseClick(prodItem: Producto)
+        fun onBtnDecreaseClick(prodItem: Producto)
     }
 }

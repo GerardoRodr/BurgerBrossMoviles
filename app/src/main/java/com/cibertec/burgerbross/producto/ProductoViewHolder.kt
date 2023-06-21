@@ -2,6 +2,7 @@ package com.cibertec.burgerbross.producto
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,9 @@ class ProductoViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var imgProducto : ImageView? = null
     private var nombreProducto : TextView? = null
     private var descProducto : TextView? = null
+    var btnDecrease : Button = itemView.findViewById(R.id.btnDecrease)
+    var btnIncrease : Button = itemView.findViewById(R.id.btnIncrease)
+    var cantProd : TextView = itemView.findViewById(R.id.cantidadProd)
 
     init {
         imgProducto = itemView.findViewById(R.id.imgProducto)

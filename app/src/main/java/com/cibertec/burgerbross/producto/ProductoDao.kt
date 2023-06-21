@@ -20,4 +20,7 @@ interface ProductoDao {
 
     @Query("Select * from " + Producto.TABLE_NAME)
     fun list(): LiveData<List<Producto>>
+
+    @Query("Select * from " + Producto.TABLE_NAME + " WHERE id_categoria_prod = :categoryId")
+    fun listByIdCategoria(categoryId: Int): LiveData<List<Producto>>
 }

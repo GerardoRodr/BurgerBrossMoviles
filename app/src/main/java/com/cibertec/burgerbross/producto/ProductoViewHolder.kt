@@ -20,9 +20,9 @@ class ProductoViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         descProducto = itemView.findViewById(R.id.descProducto)
     }
 
-    fun bind(producto: ProductoFirestore) {
-        nombreProducto?.text = producto.nombre_producto
-        descProducto?.text = producto.desc_producto
+    fun bind(producto: Producto) {
+        nombreProducto?.text = producto.nombreProducto
+        descProducto?.text = producto.descripcion
         imgProducto?.setImageResource(producto.img)
     }
 }

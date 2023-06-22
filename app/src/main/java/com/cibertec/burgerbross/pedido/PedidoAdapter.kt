@@ -27,9 +27,18 @@ class PedidoAdapter(val mItemClickListener: ItemClickListener) : RecyclerView.Ad
         holder.itemView.setOnClickListener {
             mItemClickListener.onItemClick(pedido)
         }
+
+        holder.switchEstadoPedido?.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            var estado: Boolean = isChecked
+
+            mItemClickListener.setOnCheckedChangeListener(pedido, estado)
+        }
     }
 
     interface ItemClickListener {
         fun onItemClick(pedido: PedidoFirestore)
+
+        fun setOnCheckedChangeListener(pedido: PedidoFirestore, estado: Boolean)
     }
 }

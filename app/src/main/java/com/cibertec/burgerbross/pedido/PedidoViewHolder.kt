@@ -2,6 +2,7 @@ package com.cibertec.burgerbross.pedido
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cibertec.burgerbross.R
@@ -13,12 +14,14 @@ class PedidoViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var itemPedidoTotal : TextView? = null
     private var itemPedidoFecha : TextView? = null
     private var itemPedidoEstado : TextView? = null
+    var switchEstadoPedido : Switch? = null
 
     init {
         itemPedidoNombre = itemView.findViewById(R.id.itemPedidoNombre)
         itemPedidoTotal = itemView.findViewById(R.id.itemPedidoTotal)
         itemPedidoFecha = itemView.findViewById(R.id.itemPedidoFecha)
         itemPedidoEstado = itemView.findViewById(R.id.itemPedidoEstado)
+        switchEstadoPedido = itemView.findViewById(R.id.switchEstadoPedido)
     }
 
     fun bind(pedidoFirestore: PedidoFirestore) {
@@ -34,5 +37,6 @@ class PedidoViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         itemPedidoTotal?.text = pedidoFirestore.totalPedido.toString()
         itemPedidoFecha?.text = pedidoFirestore.fechaPedido.toDate().toString()
         itemPedidoEstado?.text = estadoPedido
+        switchEstadoPedido?.isChecked = pedidoFirestore.estadoPedido
     }
 }

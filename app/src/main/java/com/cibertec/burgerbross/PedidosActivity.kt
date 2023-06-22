@@ -1,6 +1,7 @@
 package com.cibertec.burgerbross
 
 import android.os.Bundle
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,5 +45,10 @@ class PedidosActivity: AppCompatActivity(), PedidoAdapter.ItemClickListener {
 
     override fun onItemClick(pedido: PedidoFirestore) {
         TODO("Not yet implemented")
+    }
+
+    override fun setOnCheckedChangeListener(pedido: PedidoFirestore, estado: Boolean) {
+        println(pedido.nombreCliente)
+        println(estado)
     }
 }

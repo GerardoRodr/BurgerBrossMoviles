@@ -1,19 +1,26 @@
 package com.cibertec.burgerbross.pedido
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cibertec.burgerbross.InicioActivity
 import com.cibertec.burgerbross.R
+import com.cibertec.burgerbross.producto.Producto
 import com.cibertec.burgerbross.producto.ProductosManager
+import com.google.firebase.Timestamp
 
 class FinalizarPedidoActivity: AppCompatActivity() {
 
     var listaDetallePedido = ProductosManager.getProductosList()
+
+    private lateinit var pedidoViewModel: PedidoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +28,8 @@ class FinalizarPedidoActivity: AppCompatActivity() {
 
         val actionBar = supportActionBar
         actionBar?.hide()
+
+        pedidoViewModel = ViewModelProvider(this)[PedidoViewModel::class.java]
 
         var adapter = DetallePedidoAdapter()
         adapter.setDetallePedidos(listaDetallePedido)
@@ -41,6 +50,10 @@ class FinalizarPedidoActivity: AppCompatActivity() {
                 //VALIDACION DEL NOMBRE DEL CLIENTE
                 if (txtEditNombreCliente.text.isEmpty()) {
                     Toast.makeText(this, "Debes ingresar el nombre del cliente.", Toast.LENGTH_SHORT).show()
+                } else {
+                    pedidoViewModel.registrarPedidoFirestore(crearPedido(listaDetallePedido, txtEditNombreCliente.text.toString()))
+                    ProductosManager.eliminarPrePedido()
+                    startActivity(Intent(this, InicioActivity::class.java))
                 }
             }
             builder.setNegativeButton("No") { dialog, which ->
@@ -49,4 +62,15 @@ class FinalizarPedidoActivity: AppCompatActivity() {
             builder.show()
         }
     }
+
+    private fun crearPedido(detPed: List<Producto>, nCliente: String): PedidoFirestore {
+        var totalPedido = 0.0
+
+        for (producto in detPed) {
+            totalPedido += producto.cantProd * producto.precioProducto
+        }
+
+        return PedidoFirestore(false, Timestamp.now(), nCliente, totalPedido)
+    }
+
 }

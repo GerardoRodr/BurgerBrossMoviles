@@ -30,4 +30,28 @@ class PedidoViewModel: ViewModel() {
         }
     }
 
+    fun registrarPedidoFirestore(pedidoFirestore: PedidoFirestore){
+        firestore = FirebaseFirestore.getInstance()
+        val pedidosCollection = firestore.collection("pedidos")
+
+        // Crear un nuevo documento en la colección "pedidos"
+        val nuevoPedido = pedidosCollection.document()
+
+        // Crear un mapa con los datos del pedido
+        val datosPedido = hashMapOf(
+            "estado_pedido" to pedidoFirestore.estadoPedido,
+            "fecha_pedido" to pedidoFirestore.fechaPedido,
+            "nombre_cliente" to pedidoFirestore.nombreCliente,
+            "total_pedido" to pedidoFirestore.totalPedido
+        )
+
+        nuevoPedido.set(datosPedido)
+            .addOnSuccessListener {
+                println("Pedido registrado correctamente en Firestore")
+            }
+            .addOnFailureListener { e ->
+                // Ocurrió un error al intentar registrar el pedido en Firestore
+                println("Error al registrar el pedido en Firestore: $e")
+            }
+    }
 }

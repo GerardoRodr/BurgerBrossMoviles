@@ -13,7 +13,6 @@ import com.cibertec.burgerbross.pedido.PedidoViewModel
 class PedidosActivity: AppCompatActivity(), PedidoAdapter.ItemClickListener {
 
     private lateinit var pedViewModel: PedidoViewModel
-    lateinit var listaPedidos: List<PedidoFirestore>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

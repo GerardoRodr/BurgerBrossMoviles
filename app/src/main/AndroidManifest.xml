@@ -26,6 +26,7 @@
         <activity android:name=".IngresarPedidoActivity"/>
         <activity android:name=".PedidosActivity"/>
         <activity android:name=".pedido.IngresarDetallePedidoActivity"/>
+        <activity android:name=".pedido.FinalizarPedidoActivity"/>
     </application>
 
 </manifest>

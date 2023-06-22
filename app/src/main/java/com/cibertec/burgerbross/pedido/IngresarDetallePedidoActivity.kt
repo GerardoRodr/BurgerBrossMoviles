@@ -1,8 +1,10 @@
 package com.cibertec.burgerbross.pedido
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,12 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
 
         val actionBar = supportActionBar
         actionBar?.hide()
+
+        val btnContinuar = findViewById<ImageButton>(R.id.btn_adelante_ingresar_pedido)
+        btnContinuar.setOnClickListener {
+            val intent = Intent(this, FinalizarPedidoActivity::class.java)
+            startActivity(intent)
+        }
 
         val receivedBundle = intent.extras
         val receivedCategoryId = receivedBundle?.getInt("categoryId")
@@ -112,10 +120,17 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
         if (prodItem.cantProd != 0) {
             //Resta -1 a la cantidad del producto ("De base tiene más de 0")
             prodItem.cantProd -= 1
-            //Se agrega el producto a la lista de Producto
-            ProductosManager.updateProducto(prodItem)
-            //Se actualiza la cantidad en el RecyclerView
-            productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
+
+            if (prodItem.cantProd == 0) {
+                ProductosManager.delProducto(prodItem)
+                //Se actualiza la cantidad en el RecyclerView
+                productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
+            } else {
+                //Se actualiza el producto en la lista de Productos
+                ProductosManager.updateProducto(prodItem)
+                //Se actualiza la cantidad en el RecyclerView
+                productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
+            }
         } else {
             Toast.makeText(this, "Este producto ya tiene de cantidad '0' ", Toast.LENGTH_SHORT).show()
         }

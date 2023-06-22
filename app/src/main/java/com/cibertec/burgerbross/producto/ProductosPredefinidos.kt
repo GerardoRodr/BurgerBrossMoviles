@@ -53,7 +53,7 @@ class ProductosPredefinidos {
                     val p3 = Producto("Fanta", 2, "500ml - Personal", 12, 3.50)
                     p3.img = R.drawable.fanta500
 
-                    val p4 = Producto("Inka-Cola", 2, "1L", 10, 7.00)
+                    val p4 = Producto("Inka-Cola 1L", 2, "1L", 10, 7.00)
                     p4.img = R.drawable.inka1l
 
                     prodViewModel.saveProductoWithCoroutines(p1)
@@ -77,7 +77,7 @@ class ProductosPredefinidos {
                     val p2 = Producto("Papas fritas", 3, "Papas fritas como complemento", 12, 3.50)
                     p2.img = R.drawable.papas_fritas
 
-                    val p3 = Producto("Hot dog", 3, "Hot dog como complemento", 12, 1.50)
+                    val p3 = Producto("Hot Dog", 3, "Hot dog como complemento", 12, 1.50)
                     p3.img = R.drawable.hot_dog
 
                     val p4 = Producto("Tocino", 3, "Tocino como complemento", 12, 4.00)
@@ -118,7 +118,5 @@ class ProductosPredefinidos {
             }
             //------------------------------------------------------------------------------------------------
         }
-
     }
-
 }

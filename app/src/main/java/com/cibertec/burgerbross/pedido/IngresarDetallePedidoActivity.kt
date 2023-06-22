@@ -3,10 +3,8 @@ package com.cibertec.burgerbross.pedido
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cibertec.burgerbross.R
 import com.cibertec.burgerbross.producto.Producto
 import com.cibertec.burgerbross.producto.ProductoAdapter
-import com.cibertec.burgerbross.producto.ProductoViewHolder
 import com.cibertec.burgerbross.producto.ProductoViewModel
 import com.cibertec.burgerbross.producto.ProductosManager
 import com.cibertec.burgerbross.producto.ProductosPredefinidos
@@ -131,8 +128,6 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
                 //Se actualiza la cantidad en el RecyclerView
                 productoAdapter.updateCantidad(prodItem, prodItem.cantProd)
             }
-        } else {
-            Toast.makeText(this, "Este producto ya tiene de cantidad '0' ", Toast.LENGTH_SHORT).show()
         }
     }
 }

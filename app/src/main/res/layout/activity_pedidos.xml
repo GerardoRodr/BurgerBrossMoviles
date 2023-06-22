@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:backgroundTint="@color/black">
 
     <!-- Barra de navegacion -->
     <androidx.cardview.widget.CardView
@@ -30,12 +31,14 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerCategorias"
+        android:backgroundTint="@color/black"
+        android:id="@+id/recyclerPedidos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:itemCount="4"
         tools:listitem="@layout/item_pedido"
-        android:layout_margin="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         />
 
 

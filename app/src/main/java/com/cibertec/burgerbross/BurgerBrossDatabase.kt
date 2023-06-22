@@ -9,7 +9,7 @@ import com.cibertec.burgerbross.categoria.CategoriaProductoDao
 import com.cibertec.burgerbross.producto.Producto
 import com.cibertec.burgerbross.producto.ProductoDao
 
-@Database(entities = [Producto::class, CategoriaProducto::class], version = 1)
+@Database(entities = [Producto::class, CategoriaProducto::class], version = 1, exportSchema = false)
 abstract class BurgerBrossDatabase: RoomDatabase() {
 
     abstract fun productoDao(): ProductoDao

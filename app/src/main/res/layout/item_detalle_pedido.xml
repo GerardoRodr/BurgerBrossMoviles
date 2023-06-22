@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="90dp"
     android:backgroundTint="@color/night"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20dp"
@@ -21,9 +21,10 @@
 
             <TextView
                 android:id="@+id/det_ped_producto"
-                android:layout_width="350dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Hamburguesa Chorizo y Huevo"
+                android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 />
@@ -37,7 +38,7 @@
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:textColor="@color/silver"
+                android:textColor="@color/white"
                 />
 
         </RelativeLayout>
@@ -45,17 +46,35 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
-            <TextView
-                android:id="@+id/det_ped_precio"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="S/10"
-                android:textSize="20dp"
-                android:textStyle="italic"
-                android:textColor="@color/silver"
-                />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Precio: S/"
+                    android:textSize="20dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/silver"
+                    />
+
+                <TextView
+                    android:id="@+id/det_ped_precio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="10"
+                    android:textSize="20dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/silver"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -66,7 +85,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Subtotal:"
+                    android:text="Subtotal: S/"
                     android:textSize="20dp"
                     android:textStyle="italic"
                     android:textColor="@color/silver"
@@ -76,7 +95,7 @@
                     android:id="@+id/det_ped_subtotal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="S/60"
+                    android:text="60"
                     android:textStyle="italic"
                     android:textColor="@color/silver"
                     android:textSize="19dp"

@@ -24,6 +24,7 @@ data class Producto(
     @ColumnInfo(name = "desc_prod")
     val descripcion: String,
 
+    @ColumnInfo(name = "stock")
     val stock: Int,
 
     @ColumnInfo(name = "precio_producto")

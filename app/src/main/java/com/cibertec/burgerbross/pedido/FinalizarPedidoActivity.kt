@@ -1,9 +1,13 @@
 package com.cibertec.burgerbross.pedido
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +33,8 @@ class FinalizarPedidoActivity: AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.hide()
 
+        val loadingAnimation = findViewById<RelativeLayout>(R.id.loadingAnimation)
+
         pedidoViewModel = ViewModelProvider(this)[PedidoViewModel::class.java]
 
         var adapter = DetallePedidoAdapter()
@@ -51,9 +57,16 @@ class FinalizarPedidoActivity: AppCompatActivity() {
                 if (txtEditNombreCliente.text.isEmpty()) {
                     Toast.makeText(this, "Debes ingresar el nombre del cliente.", Toast.LENGTH_SHORT).show()
                 } else {
-                    pedidoViewModel.registrarPedidoFirestore(crearPedido(listaDetallePedido, txtEditNombreCliente.text.toString()))
-                    ProductosManager.eliminarPrePedido()
-                    startActivity(Intent(this, InicioActivity::class.java))
+
+                    loadingAnimation.visibility = View.VISIBLE
+
+                    pedidoViewModel.registrarPedidoFirestore(crearPedido(listaDetallePedido,
+                        txtEditNombreCliente.text.toString()), listaDetallePedido) {
+                        //CUANDO SE TERMINE DE EJECUTAR EL REGISTRAR PEDIDO SE EJECUTA ESTO:
+                        ProductosManager.eliminarPrePedido()
+                        loadingAnimation.visibility = View.GONE
+                        startActivity(Intent(this, InicioActivity::class.java))
+                    }
                 }
             }
             builder.setNegativeButton("No") { dialog, which ->

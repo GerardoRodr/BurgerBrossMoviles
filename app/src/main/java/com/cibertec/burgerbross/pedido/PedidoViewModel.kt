@@ -2,6 +2,7 @@ package com.cibertec.burgerbross.pedido
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cibertec.burgerbross.producto.Producto
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PedidoViewModel: ViewModel() {
@@ -30,7 +31,8 @@ class PedidoViewModel: ViewModel() {
         }
     }
 
-    fun registrarPedidoFirestore(pedidoFirestore: PedidoFirestore){
+    fun registrarPedidoFirestore(pedidoFirestore: PedidoFirestore, detPed: List<Producto>,
+        callback: () -> Unit){
         firestore = FirebaseFirestore.getInstance()
         val pedidosCollection = firestore.collection("pedidos")
 
@@ -48,6 +50,26 @@ class PedidoViewModel: ViewModel() {
         nuevoPedido.set(datosPedido)
             .addOnSuccessListener {
                 println("Pedido registrado correctamente en Firestore")
+
+                val detallePedidoCollection = nuevoPedido.collection("detalle_pedido")
+
+                for(producto in detPed) {
+                    val nuevoDetalle = detallePedidoCollection.document()
+                    val datosDetalle = hashMapOf(
+                        "cantidad" to producto.cantProd,
+                        "precio_producto" to producto.precioProducto,
+                        "producto" to producto.nombreProducto,
+                        "subtotal" to producto.cantProd * producto.precioProducto
+                    )
+
+                    nuevoDetalle.set(datosDetalle).addOnSuccessListener {
+                        println(producto.nombreProducto + " CANTIDAD: " + producto.cantProd)
+                        //CUANDO SE LLEGUE A GUARDAR LOS DATOS DE detallePedido EN FIRESTORE RECIEN TERMINA LA FUNCION
+                        callback()
+                    }.addOnFailureListener { e->
+                        println("Error al registrar el detallePedido en Firestore: $e")
+                    }
+                }
             }
             .addOnFailureListener { e ->
                 // Ocurrió un error al intentar registrar el pedido en Firestore

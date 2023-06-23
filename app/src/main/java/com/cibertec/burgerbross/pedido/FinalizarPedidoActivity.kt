@@ -49,8 +49,8 @@ class FinalizarPedidoActivity: AppCompatActivity() {
         val btnContinuar = findViewById<ImageButton>(R.id.btn_adelante_finalizar_pedido)
         btnContinuar.setOnClickListener {
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Confirmación")
-            builder.setMessage("¿Estás seguro de que deseas continuar?")
+            builder.setTitle("Confirmar pedido")
+            builder.setMessage("¿Estás seguro de que deseas concluir el pedido?")
             builder.setPositiveButton("Sí") { dialog, which ->
 
                 //VALIDACION DEL NOMBRE DEL CLIENTE

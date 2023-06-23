@@ -3,6 +3,8 @@ package com.cibertec.burgerbross
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,12 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cibertec.burgerbross.categoria.CategoriaProducto
 import com.cibertec.burgerbross.categoria.CategoriaProductoAdapter
 import com.cibertec.burgerbross.categoria.CategoriaProductoViewModel
+import com.cibertec.burgerbross.pedido.FinalizarPedidoActivity
 import com.cibertec.burgerbross.pedido.IngresarDetallePedidoActivity
+import com.cibertec.burgerbross.producto.ProductosManager
 
 class IngresarPedidoActivity: AppCompatActivity(), CategoriaProductoAdapter.ItemClickListener {
 
     private lateinit var catViewModel: CategoriaProductoViewModel
     lateinit var listaCategorias: List<CategoriaProducto>
+    private val productoEnManager = ProductosManager.getProductosList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +29,16 @@ class IngresarPedidoActivity: AppCompatActivity(), CategoriaProductoAdapter.Item
 
         val actionBar = supportActionBar
         actionBar?.hide()
+
+        val btnAdelante = findViewById<ImageButton>(R.id.btn_adelante_ingresar_pedido)
+        btnAdelante.setOnClickListener {
+            if (productoEnManager.isNotEmpty()) {
+                val intent = Intent(this, FinalizarPedidoActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Aun no has agregado nada al pedido", Toast.LENGTH_LONG).show()
+            }
+        }
 
         catViewModel = run {
             ViewModelProvider(this)[CategoriaProductoViewModel::class.java]

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,8 +32,13 @@ class IngresarDetallePedidoActivity: AppCompatActivity(), ProductoAdapter.ItemCl
 
         val btnContinuar = findViewById<ImageButton>(R.id.btn_adelante_ingresar_pedido)
         btnContinuar.setOnClickListener {
-            val intent = Intent(this, FinalizarPedidoActivity::class.java)
-            startActivity(intent)
+            var productoEnManager = ProductosManager.getProductosList()
+            if (productoEnManager.isNotEmpty()) {
+                val intent = Intent(this, FinalizarPedidoActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Aun no has agregado nada al pedido", Toast.LENGTH_LONG).show()
+            }
         }
 
         val receivedBundle = intent.extras

@@ -8,4 +8,6 @@ data class PedidoFirestore(
     val fechaPedido: Timestamp,
     val nombreCliente: String,
     val totalPedido: Double
-)
+) {
+    var documentId : String? = null
+}

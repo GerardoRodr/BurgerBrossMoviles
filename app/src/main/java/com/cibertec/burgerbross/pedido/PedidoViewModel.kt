@@ -2,13 +2,17 @@ package com.cibertec.burgerbross.pedido
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cibertec.burgerbross.detallepedido.DetallePedidoFirestore
 import com.cibertec.burgerbross.producto.Producto
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 
 class PedidoViewModel: ViewModel() {
 
     private lateinit var firestore: FirebaseFirestore
     val listPedidoMutable = MutableLiveData<List<PedidoFirestore>>()
+    val listDetallePedidoMutable = MutableLiveData<List<DetallePedidoFirestore>>()
 
     //FUNCION PARA OBTENER LOS PEDIDOS DESDE FIRESTORE
     fun getPedidosFirestore() {
@@ -23,7 +27,8 @@ class PedidoViewModel: ViewModel() {
                 val totalPedido = document.getDouble("total_pedido")
 
                 if (estadoPedido != null && fechaPedido != null && nombreCliente != null && totalPedido != null) {
-                    val item = PedidoFirestore(estadoPedido, fechaPedido, nombreCliente, totalPedido)
+                    var item = PedidoFirestore(estadoPedido, fechaPedido, nombreCliente, totalPedido)
+                    item.documentId = document.id
                     listPedidos.add(item)
                 }
             }
@@ -56,6 +61,7 @@ class PedidoViewModel: ViewModel() {
                 for(producto in detPed) {
                     val nuevoDetalle = detallePedidoCollection.document()
                     val datosDetalle = hashMapOf(
+                        "idProducto" to producto.idProducto,
                         "cantidad" to producto.cantProd,
                         "precio_producto" to producto.precioProducto,
                         "producto" to producto.nombreProducto,
@@ -75,5 +81,32 @@ class PedidoViewModel: ViewModel() {
                 // Ocurrió un error al intentar registrar el pedido en Firestore
                 println("Error al registrar el pedido en Firestore: $e")
             }
+    }
+
+    fun getDetallePedidoById(documentId: String, nombreCliente: String) {
+        firestore = FirebaseFirestore.getInstance()
+        val pedidosCollectionRef = firestore.collection("pedidos")
+
+        val detallePedidoCollectionRef = pedidosCollectionRef.document(documentId).collection("detalle_pedido")
+
+        detallePedidoCollectionRef.get().addOnSuccessListener { documentList ->
+            val listProductos = arrayListOf<DetallePedidoFirestore>()
+
+            for (document in documentList) {
+                val cantidad = document.getLong("cantidad")?.toInt()
+                val idProducto = document.getLong("idProducto")?.toInt()
+                val precioProducto = document.getDouble("precio_producto")
+                val producto = document.getString("producto")
+                val subtotal = document.getDouble("subtotal")
+
+                if (idProducto != null && cantidad != null && precioProducto != null && producto != null && subtotal != null) {
+                    // Crea un objeto DetallePedido con los datos obtenidos
+                    var detallePedido = DetallePedidoFirestore(cantidad, idProducto, precioProducto, producto, subtotal)
+                    detallePedido.nombreCliente = nombreCliente
+                    listProductos.add(detallePedido)
+                }
+            }
+            listDetallePedidoMutable.value = listProductos
+        }
     }
 }

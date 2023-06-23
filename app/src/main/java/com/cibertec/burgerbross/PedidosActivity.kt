@@ -1,11 +1,12 @@
 package com.cibertec.burgerbross
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cibertec.burgerbross.detallepedido.DetallePedidoActivity
 import com.cibertec.burgerbross.pedido.PedidoAdapter
 import com.cibertec.burgerbross.pedido.PedidoFirestore
 import com.cibertec.burgerbross.pedido.PedidoViewModel
@@ -43,7 +44,14 @@ class PedidosActivity: AppCompatActivity(), PedidoAdapter.ItemClickListener {
     }
 
     override fun onItemClick(pedido: PedidoFirestore) {
-        TODO("Not yet implemented")
+        val intent = Intent(this, DetallePedidoActivity::class.java)
+        val bundle = Bundle()
+
+        bundle.putString("documentId", pedido.documentId)
+        bundle.putString("nombreCliente", pedido.nombreCliente)
+        bundle.putDouble("total", pedido.totalPedido)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
     override fun setOnCheckedChangeListener(pedido: PedidoFirestore, estado: Boolean) {

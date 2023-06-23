@@ -15,6 +15,10 @@ class ProductoViewModel (application: Application): AndroidViewModel(application
         return repository.getProductosByCategoria(idCat);
     }
 
+    fun prodById(id: Int): Producto? {
+        return repository.getProductoById(id)
+    }
+
     fun saveProductoWithCoroutines(prod: Producto) {
         viewModelScope.launch {
             repository.insertProductoWithCoroutines(prod)

@@ -75,7 +75,6 @@ class IngresarPedidoActivity: AppCompatActivity(), CategoriaProductoAdapter.Item
     }
 
     override fun onItemClick(categItem: CategoriaProducto) {
-        println(categItem.idCategoriaProducto)
         val intent = Intent(this, IngresarDetallePedidoActivity::class.java)
         val bundle = Bundle()
         bundle.putInt("categoryId", categItem.idCategoriaProducto)

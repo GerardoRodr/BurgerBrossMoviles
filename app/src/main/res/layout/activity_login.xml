@@ -63,6 +63,7 @@
         android:backgroundTint="@color/blue"
         android:padding="13dp"
         android:text="Ingresar"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
 </LinearLayout>

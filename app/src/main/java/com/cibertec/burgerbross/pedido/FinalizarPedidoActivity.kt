@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +40,15 @@ class FinalizarPedidoActivity: AppCompatActivity() {
 
         var adapter = DetallePedidoAdapter()
         adapter.setDetallePedidos(listaDetallePedido)
+
+        //DEFINIENDO EL TOTAL Y AÑADIENDOLO A LA VISTA
+        var total = 0.0
+        for (prod in listaDetallePedido) {
+            total += prod.cantProd * prod.precioProducto
+        }
+        val txtTotal = findViewById<TextView>(R.id.totalFinalizarPed)
+        txtTotal.text = total.toString()
+        //---------------------------------------------------------------
 
         val recyclerDetallePedido = findViewById<RecyclerView>(R.id.recyclerDetallePedidoFinalizar)
         recyclerDetallePedido.adapter = adapter
@@ -82,8 +92,6 @@ class FinalizarPedidoActivity: AppCompatActivity() {
         for (producto in detPed) {
             totalPedido += producto.cantProd * producto.precioProducto
         }
-
         return PedidoFirestore(false, Timestamp.now(), nCliente, totalPedido)
     }
-
 }

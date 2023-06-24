@@ -94,6 +94,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:text="Hora: "
+                    android:textStyle="bold"
+                    android:textColor="@color/silver"
+                    />
+
+                <TextView
+                    android:id="@+id/itemPedidoHora"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="00:01 p.m"
+                    android:textColor="@color/silver"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
                     android:text="Estado: "
                     android:textStyle="bold"
                     android:textColor="@color/silver"
@@ -111,15 +134,32 @@
 
         </LinearLayout>
 
-        <Switch
-            android:id="@+id/switchEstadoPedido"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_gravity="center_vertical"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
-            />
+            >
+
+            <Switch
+                android:id="@+id/switchEstadoPedido"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                />
+
+            <ImageButton
+                android:id="@+id/btnEliminarPedidoFirestore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/eliminar"
+                android:backgroundTint="@color/night"
+                android:layout_marginTop="20dp"
+                />
+
+        </LinearLayout>
     </RelativeLayout>
 
 

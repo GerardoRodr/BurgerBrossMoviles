@@ -11,7 +11,8 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="gold">#FFD700</color>
-    <color name="green_success">#007D5C</color>
+    <color name="green_success">#4BB543</color>
+    <color name="danger">#cc3300</color>
 
 
 </resources>

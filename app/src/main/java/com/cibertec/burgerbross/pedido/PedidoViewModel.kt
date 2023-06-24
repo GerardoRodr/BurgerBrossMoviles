@@ -13,6 +13,7 @@ class PedidoViewModel: ViewModel() {
     private lateinit var firestore: FirebaseFirestore
     val listPedidoMutable = MutableLiveData<List<PedidoFirestore>>()
     val listDetallePedidoMutable = MutableLiveData<List<DetallePedidoFirestore>>()
+    lateinit var adapter: PedidoAdapter
 
     //FUNCION PARA OBTENER LOS PEDIDOS DESDE FIRESTORE
     fun getPedidosFirestore() {
@@ -80,6 +81,38 @@ class PedidoViewModel: ViewModel() {
             .addOnFailureListener { e ->
                 // Ocurrió un error al intentar registrar el pedido en Firestore
                 println("Error al registrar el pedido en Firestore: $e")
+            }
+    }
+
+    fun borrarDocumentoFirestore(documentId: String, callback: () -> Unit) {
+        val firestore = FirebaseFirestore.getInstance()
+        //DEFINIMOS EL DOCUMENTO A BORRAR CON LA ID
+        val documento = firestore.collection("pedidos").document(documentId)
+
+        documento.delete()
+            .addOnSuccessListener {
+                println("Documento '${documentId}' borrado correctamente de Firestore")
+
+                callback()
+            }
+            .addOnFailureListener { e ->
+                println("Error al borrar el documento de Firestore: $e")
+            }
+    }
+
+    fun actualizarEstadoPedidoFirestore(documentId: String, nuevoEstado: Boolean) {
+        val firestore = FirebaseFirestore.getInstance()
+        val documento = firestore.collection("pedidos").document(documentId)
+
+        val actualizacion = hashMapOf<String, Any>("estado_pedido" to nuevoEstado)
+
+        documento.update(actualizacion)
+            .addOnSuccessListener {
+                println("Estado del pedido actualizado correctamente en Firestore")
+                getPedidosFirestore()
+            }
+            .addOnFailureListener { e ->
+                println("Error al actualizar el estado del pedido en Firestore: $e")
             }
     }
 

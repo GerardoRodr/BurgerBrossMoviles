@@ -86,19 +86,58 @@
             android:orientation="vertical"
             android:layout_margin="10dp">
 
-            <EditText
-                android:id="@+id/txtEditNombreCliente"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre del Cliente"
-                android:inputType="text|textCapSentences"
-                android:imeOptions="actionDone"
-                android:maxLines="1"
-                android:textSize="29sp"
-                android:textStyle="italic"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/white"
-                />
+                android:layout_marginEnd="15dp"
+                >
+
+                <EditText
+                    android:id="@+id/txtEditNombreCliente"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre del Cliente"
+                    android:inputType="text|textCapSentences"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:textSize="24sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="S/"
+                        android:textSize="23sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/white"
+                        />
+
+                    <TextView
+                        android:id="@+id/totalFinalizarPed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="23.60"
+                        android:textSize="23sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/white"
+                        />
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerDetallePedidoFinalizar"

@@ -17,27 +17,27 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/det_ped_producto"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Hamburguesa Chorizo y Huevo"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/det_ped_cantidad"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="3"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:textColor="@color/white"
                 />
 
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Precio: S/"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="italic"
                     android:textColor="@color/silver"
                     />
@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="10"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="italic"
                     android:textColor="@color/silver"
                     />
@@ -80,13 +80,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_alignParentRight="true">
+                android:layout_alignParentEnd="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Subtotal: S/"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="italic"
                     android:textColor="@color/silver"
                     />
@@ -98,7 +98,7 @@
                     android:text="60"
                     android:textStyle="italic"
                     android:textColor="@color/silver"
-                    android:textSize="19dp"
+                    android:textSize="19sp"
                     />
             </LinearLayout>
 

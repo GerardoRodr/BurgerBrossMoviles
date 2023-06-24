@@ -34,11 +34,17 @@ class PedidoAdapter(val mItemClickListener: ItemClickListener) : RecyclerView.Ad
 
             mItemClickListener.setOnCheckedChangeListener(pedido, estado)
         }
+
+        holder.btnEliminar?.setOnClickListener {
+            mItemClickListener.setOnBtnEliminarClick(pedido)
+        }
     }
 
     interface ItemClickListener {
         fun onItemClick(pedido: PedidoFirestore)
 
         fun setOnCheckedChangeListener(pedido: PedidoFirestore, estado: Boolean)
+
+        fun setOnBtnEliminarClick(pedido: PedidoFirestore)
     }
 }

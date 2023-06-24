@@ -3,8 +3,10 @@ package com.cibertec.burgerbross
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,6 +31,27 @@ class IngresarPedidoActivity: AppCompatActivity(), CategoriaProductoAdapter.Item
 
         val actionBar = supportActionBar
         actionBar?.hide()
+
+        val btnEliminarPedido = findViewById<Button>(R.id.btnEliminarPedido)
+
+        btnEliminarPedido.setOnClickListener {
+
+            if (productoEnManager.isNotEmpty()) {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Eliminar pedido")
+                builder.setMessage("¿Estás seguro de que deseas eliminar el pedido?")
+                builder.setPositiveButton("Sí") { dialog, which ->
+                    ProductosManager.eliminarPrePedido()
+                    Toast.makeText(this, "Se elimino el pedido", Toast.LENGTH_SHORT).show()
+                }
+                builder.setNegativeButton("No") { dialog, which ->
+                    println("NO SE ElIMINO EL PEDIDO")
+                }
+                builder.show()
+            } else {
+                Toast.makeText(this, "Aun no has agregado nada al pedido", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         val btnAdelante = findViewById<ImageButton>(R.id.btn_adelante_ingresar_pedido)
         btnAdelante.setOnClickListener {

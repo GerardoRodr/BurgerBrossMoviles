@@ -19,7 +19,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingresa tu DNI"
+        android:hint="Ingresa tu email"
         app:boxCornerRadiusTopEnd="5dp"
         app:boxCornerRadiusTopStart="5dp"
         android:layout_margin="10dp"
@@ -28,7 +28,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginUsername"
+            android:id="@+id/loginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"/>

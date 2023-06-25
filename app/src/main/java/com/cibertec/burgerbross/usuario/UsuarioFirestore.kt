@@ -1,8 +1,8 @@
 package com.cibertec.burgerbross.usuario
 
 data class UsuarioFirestore(
-    val correo: String,
-    val contraseña: String
+    var correo: String,
+    var contraseña: String
 ) {
-    val nombre: String = ""
+    var nombre: String = ""
 }

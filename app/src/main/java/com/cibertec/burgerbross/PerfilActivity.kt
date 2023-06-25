@@ -1,7 +1,9 @@
 package com.cibertec.burgerbross
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.cibertec.burgerbross.usuario.UsuarioManager
 
 class PerfilActivity : AppCompatActivity() {
 
@@ -11,5 +13,8 @@ class PerfilActivity : AppCompatActivity() {
 
         val actionBar = supportActionBar
         actionBar?.hide()
+
+        val emailUsuario = findViewById<TextView>(R.id.emailUsuarioPerfil)
+        emailUsuario.text = UsuarioManager.obtenerEmail()
     }
 }

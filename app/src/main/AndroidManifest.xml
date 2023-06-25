@@ -27,6 +27,8 @@
         <activity android:name=".pedido.IngresarDetallePedidoActivity"/>
         <activity android:name=".pedido.FinalizarPedidoActivity"/>
         <activity android:name=".detallepedido.DetallePedidoActivity"/>
+        <activity android:name=".StockActivity"/>
+        <activity android:name=".producto.VerStockActivity"/>
     </application>
 
 </manifest>

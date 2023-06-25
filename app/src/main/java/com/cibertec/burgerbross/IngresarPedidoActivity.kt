@@ -67,29 +67,6 @@ class IngresarPedidoActivity: AppCompatActivity(), CategoriaProductoAdapter.Item
             ViewModelProvider(this)[CategoriaProductoViewModel::class.java]
         }
 
-        //INSERSION DE DATOS PREDEFINIDOS DENTRO DE LA BD
-        catViewModel.cat?.observe(this) { cats ->
-            if (cats.isEmpty()) {
-                val cat1 = CategoriaProducto("Hamburguesas")
-                cat1.iconoCategoria = R.drawable.hamburguesas_icon
-
-                val cat2 = CategoriaProducto("Bebidas")
-                cat2.iconoCategoria = R.drawable.bebidas_icon
-
-                val cat3 = CategoriaProducto("Complementos")
-                cat3.iconoCategoria = R.drawable.complementos_icon
-
-                val cat4 = CategoriaProducto("Adicionales")
-                cat4.iconoCategoria = R.drawable.adicionales_icon
-
-                catViewModel.saveCategoriaProdsWithCoroutines(cat1)
-                catViewModel.saveCategoriaProdsWithCoroutines(cat2)
-                catViewModel.saveCategoriaProdsWithCoroutines(cat3)
-                catViewModel.saveCategoriaProdsWithCoroutines(cat4)
-            }
-        }
-        //------------------------------------------------------------------------------------------------
-
         val recyclerCategoria = findViewById<RecyclerView>(R.id.recyclerCategoriasIngresarPedido)
 
         val adapter = CategoriaProductoAdapter(this)

@@ -32,18 +32,35 @@
         android:src="@drawable/user" />
 
     <!-- CardView 1 - Ingresar Pedido -->
-    <TextView
-        android:id="@+id/bienvenida"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignTop="@+id/inicio"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="41dp"
-        android:text="Bienvenido \nWilhelm"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        android:textStyle="bold" />
+        android:id="@+id/bienvenida"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/emailUsuarioInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="luisadmin@gmail.com"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="italic" />
+
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_ingresar_pedido"
@@ -150,42 +167,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Aquí puedes visualizar el stock de los productos."
-                android:textColor="@color/silver"/>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- CardView - Ver Stock -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_cocina"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/card_ver_stock"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="13dp"
-        app:cardBackgroundColor="@color/night">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="13dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cocina"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Aqui podras acceder a la interfaz de cocina."
                 android:textColor="@color/silver"/>
 
         </LinearLayout>

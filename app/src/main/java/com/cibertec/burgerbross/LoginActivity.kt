@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.cibertec.burgerbross.usuario.LoginViewModel
+import com.cibertec.burgerbross.usuario.UsuarioManager
 import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivity : AppCompatActivity() {
@@ -28,8 +29,9 @@ class LoginActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.btn_login)
         btnLogin.setOnClickListener{
 
-            if(edtEmail.text != null && edtPass != null) {
+            if(edtEmail.text?.isEmpty() == false || edtPass.text?.isEmpty() == false) {
                 viewModel.login(edtEmail.text.toString(), edtPass.text.toString())
+                UsuarioManager.asignarUsuario(edtEmail.text.toString(), edtPass.text.toString())
             } else {
                 Toast.makeText(this, "Ingrese un email y contraseña", Toast.LENGTH_SHORT).show()
             }

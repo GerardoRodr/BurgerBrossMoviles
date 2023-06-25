@@ -11,6 +11,12 @@ class ProductoViewModel (application: Application): AndroidViewModel(application
 
     val prod = repository.getProductos()
 
+    fun updateProdWithCoroutines(prod: Producto) {
+        viewModelScope.launch {
+            repository.updateProductoWithCoroutines(prod)
+        }
+    }
+
     fun prodByIdCat(idCat: Int): LiveData<List<Producto>>? {
         return repository.getProductosByCategoria(idCat);
     }

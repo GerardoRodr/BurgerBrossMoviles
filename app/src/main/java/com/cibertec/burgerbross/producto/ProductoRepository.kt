@@ -14,9 +14,19 @@ class ProductoRepository (application: Application) {
         processInsertProducto(producto)
     }
 
+    suspend fun updateProductoWithCoroutines(producto: Producto) {
+        processUpdateProducto(producto)
+    }
+
     private suspend fun processInsertProducto(producto: Producto) {
         withContext(Dispatchers.Default) {
             productoDao?.insert(producto)
+        }
+    }
+
+    private suspend fun processUpdateProducto(producto: Producto) {
+        withContext(Dispatchers.Default) {
+            productoDao?.update(producto)
         }
     }
 
